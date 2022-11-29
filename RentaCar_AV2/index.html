@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de gerenciamnto de aluguel de Carros</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: medium;
+        }
+        section{
+            background-color: aquamarine;
+            text-align: center;
+            width: auto;
+            height: 180px;
+        }
+        h1{
+            padding-top: 20px;
+        }
+        h2{
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h1>Falls Car</h1>
+        <h2>Seja Bem-vindo(a) ao Sistema de Aluguel de Automóveis</h2>
+    </section>
+
+    <form id="formIncluir">
+        <fieldset>
+            <label>Carro:</label>
+            <input type = "text" name = "carro" id = "carro"><br><br>
+            <label>Placa:</label>
+            <input type = "text" name = "placa" id = "placa"><br><br>
+            <label>Modelo:</label>
+            <input type = "text" name = "modelo" id = "modelo"><br><br>
+            <label>Dias para locação:</label>
+            <input type = "text" name = "dias" id = "dias"><br><br>
+            <input type = "button" name = "envio" value="Enviar" 
+              onclick="enviarForm();">
+          </fieldset>
+      </form>
+      <p id="msg">
+    </p>
+
+
+
+    <script>
+        function enviarForm() { 
+                let pCarro = document.getElementById("carro").value;
+                let pPlaca = document.getElementById("placa").value;
+                let pModelo = document.getElementById("modelo").value;
+                let pDias = document.getElementById("dias").value;
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    console.log("mudou status: " + this.readyState);
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("Chegou resposta: " + this.responseText)
+                        document.getElementById("msg").innerHTML = this.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost/index.html?nome=" + pCarro +
+                "&placa=" + pPlaca + "&modelo=" + pModelo + "&dias=" + pDias);
+                xmlHttp.send();
+                console.log("Enviei requisição");
+            }
+    </script>
+
+
+
+
+
+    
+</body>
+</html>
